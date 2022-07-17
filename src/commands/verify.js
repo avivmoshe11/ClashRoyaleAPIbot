@@ -1,5 +1,7 @@
 const { Profile } = require("../models/profiles");
 const fetch = require("../functions/fetch");
+const grantRole = require("../functions/grantRole");
+
 module.exports = {
   name: "verify",
   run: async (client, msg, args) => {
@@ -7,6 +9,7 @@ module.exports = {
     const profileFromDb = await Profile.findOne({ discordId: userId });
     if (!profileFromDb) return msg.channel.send("There is no player profile saved under that user");
     if (profileFromDb.verified) return msg.channel.send("User already verified");
+
     if (!profileFromDb.verifyQuest) {
       const generateQuest = `verify${Math.floor(Math.random() * 100)}`;
       await Profile.findOneAndUpdate(
@@ -35,6 +38,7 @@ module.exports = {
             verified: true,
           }
         );
+        await grantRole.run(msg, userId);
         return msg.channel.send("Verified!");
       }
     }
