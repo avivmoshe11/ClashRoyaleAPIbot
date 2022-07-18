@@ -7,6 +7,7 @@ module.exports = {
   aliases: [],
   run: async (client, msg, args) => {
     const userId = msg.author.id;
+    if (!args[0]) return msg.channel.send("invalid tag format (must be #Tag)");
     const tag = args[0];
     const data = await fetch.run("players", tag.replace("#", "%23"));
     if (data.err || data.response.reason == "notFound") return msg.channel.send("invalid tag");

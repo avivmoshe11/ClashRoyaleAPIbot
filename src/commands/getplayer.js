@@ -10,7 +10,7 @@ module.exports = {
   group: "all",
   aliases: [],
   run: async (client, msg, args) => {
-    if (!args[0].startsWith("#")) return msg.channel.send("must include a valid tag: #tag");
+    if (!args[0] || !args[0].startsWith("#")) return msg.channel.send("must include a valid tag: #tag");
     const playerTag = args[0];
     const data = await fetch.run("players", playerTag.replace("#", "%23"));
     if (data.err || data.response.reason == "notFound") return msg.channel.send("invalid tag");
