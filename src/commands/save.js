@@ -2,6 +2,9 @@ const fetch = require("../functions/fetch");
 const { Profile } = require("../models/profiles");
 module.exports = {
   name: "save",
+  description: "Saves a tag to your discord account",
+  group: "all",
+  aliases: [],
   run: async (client, msg, args) => {
     const userId = msg.author.id;
     const tag = args[0];
@@ -11,11 +14,12 @@ module.exports = {
     const profileFromDbByTag = await Profile.findOne({ playerTag: tag });
     if (profileFromDbByTag) return msg.channel.send(`tag is already taken by <@${profileFromDbByTag.discordId}>`);
     const profileFromDbByDiscordId = await Profile.findOne({ discordId: userId });
-    if (profileFromDbByDiscordId) return msg.channel.send(`your tag is already saved as ${profileFromDbByDiscordId.playerTag}`);
+    if (profileFromDbByDiscordId)
+      return msg.channel.send(`your tag is already saved as ${profileFromDbByDiscordId.playerTag} contact an admin to change.`);
     await new Profile({
       discordId: userId,
       playerTag: tag,
     }).save();
-    msg.channel.send(`The player ${data.response.name} has been added to your profile successfully`);
+    msg.channel.send(`The player **${data.response.name}** has been added to your profile successfully`);
   },
 };

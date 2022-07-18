@@ -3,8 +3,11 @@ const grantRole = require("../functions/grantRole");
 
 module.exports = {
   name: "verifyuser",
+  description: "Verifies member without need of verify",
+  group: "mod",
+  aliases: [],
   run: async (client, msg, args) => {
-    const permitted = await msg.member.roles.cache.get("987702343317458964");
+    const permitted = await msg.member.roles.cache.get("998662550382182410");
     if (!permitted) return msg.channel.send("You don't have the permissions to use that command");
     try {
       let userId;

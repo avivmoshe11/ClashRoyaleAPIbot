@@ -2,25 +2,29 @@ const fetch = require("../functions/fetch");
 const { MessageEmbed } = require("discord.js");
 const { type } = require("os");
 const { numberEqual } = require("@sapphire/shapeshift");
+const { Profile } = require("../models/profiles");
 
 module.exports = {
   name: "getplayer",
+  description: "Returns a player ticket",
+  group: "all",
+  aliases: [],
   run: async (client, msg, args) => {
     if (!args[0].startsWith("#")) return msg.channel.send("must include a valid tag: #tag");
     const playerTag = args[0];
     const data = await fetch.run("players", playerTag.replace("#", "%23"));
     if (data.err || data.response.reason == "notFound") return msg.channel.send("invalid tag");
+    const userFromDb = await Profile.findOne({ playerTag: playerTag });
     try {
       const embeddedMessage = new MessageEmbed()
         .setColor("#04a2d5")
-        .setTitle(`**${data.response.name}  |  ${data.response.tag}**`)
+        .setTitle(`${isVerified(userFromDb)}  **${data.response.name}  |  ${data.response.tag}** :squid:`)
         .setURL(`https://royaleapi.com/player/${data.response.tag.slice(1)}`)
-        //.setDescription - from mongodb state verification
         .setFields([
           { name: `Season Highestㅤㅤㅤ`, value: `${arenaEmoji(seasonHighest(data))} ${seasonHighest(data)}`, inline: true },
           { name: `Best Seasonㅤㅤㅤㅤ`, value: `${arenaEmoji(bestSeason(data))} ${bestSeason(data)}`, inline: true },
           { name: `Previous Seasonㅤ`, value: `${arenaEmoji(previousSeason(data))} ${previousSeason(data)}`, inline: true },
-          { name: `Trophies`, value: `${arenaEmoji(data.response.trophies)} ${data.response.trophies}`, inline: true },
+          { name: `Trophies`, value: `${arenaEmoji(data.response.trophies)} ${trophies(data)}`, inline: true },
           { name: `Best Trophies`, value: `<:trophies:997463413393469521> ${data.response.bestTrophies}`, inline: true },
           { name: `King Level`, value: `${data.response.expLevel}`, inline: true },
           { name: clanRole(data) + "", value: clan(data), inline: true },
@@ -47,16 +51,25 @@ module.exports = {
           { name: `War Day Wins`, value: `<:medal:997489117476696146> ${data.response.warDayWins}`, inline: true },
           { name: `Cards Won`, value: `<:cardscollected:997495145207447562> ${data.response.challengeCardsWon}`, inline: true },
           { name: `Total Donations`, value: `<:cardstack:997495143835906088> ${data.response.totalDonations}`, inline: true },
-        ]);
+        ])
+        .setFooter({
+          text: "made by Aviv#1234",
+          iconURL: "https://static.euronews.com/articles/stories/05/79/99/44/2000x1333_cmsv2_292bef7f-8fab-5f0d-bed5-63856832498b-5799944.jpg",
+        });
       msg.channel.send({ embeds: [embeddedMessage] });
     } catch {
       msg.channel.send("something went wrong. call an admin");
     }
   },
 };
-
+function isVerified(userFromDb) {
+  if (!userFromDb || !userFromDb.verified) return `<a:CRI_animatedX:976445654559768576>`;
+  return `<a:animatedv:998263988045484103>`;
+}
 function seasonHighest(data) {
-  return data.response.leagueStatistics.currentSeason.bestTrophies ? data.response.leagueStatistics.currentSeason.bestTrophies : "Not Yet";
+  return data.response.leagueStatistics.currentSeason.bestTrophies
+    ? data.response.leagueStatistics.currentSeason.bestTrophies
+    : "<:notyet:998681698168471665>  Not Yet";
 }
 
 function bestSeason(data) {
@@ -66,11 +79,16 @@ function bestSeason(data) {
 }
 
 function previousSeason(data) {
+  if (!data.response.leagueStatistics.previousSeason) return "--";
   return data.response.leagueStatistics.previousSeason.rank
     ? data.response.leagueStatistics.previousSeason.trophies + " #_" + data.response.leagueStatistics.previousSeason.rank + "_"
     : data.response.leagueStatistics.previousSeason.trophies;
 }
-
+function trophies(data) {
+  return data.response.leagueStatistics.currentSeason.rank
+    ? data.response.leagueStatistics.currentSeason.trophies + " #_" + data.response.leagueStatistics.currentSeason.rank + "_"
+    : data.response.leagueStatistics.currentSeason.trophies;
+}
 function clanRole(data) {
   if (!data.response.role) return "No Clan";
   if (data.response.role == "member") return "Member in";

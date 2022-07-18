@@ -16,6 +16,8 @@ mongoose
   });
 
 client.commands = new Collection();
+client.aliases = new Collection();
+
 const commands = fs.readdirSync("./src/commands").filter((file) => file.endsWith(".js"));
 console.log("loading...");
 
@@ -23,10 +25,13 @@ for (file of commands) {
   const commandName = file.split(".")[0];
   const command = require(`./commands/${commandName}`);
   client.commands.set(command.name, command);
+  command.aliases.forEach((alias) => {
+    client.aliases.set(alias, command.name);
+  });
   console.log(`${file} has been loaded`);
 }
 
-const prefix = "!!";
+const prefix = "!";
 
 client.on("ready", async () => {
   console.log("ready!");
@@ -41,6 +46,8 @@ client.on("messageCreate", async (msg) => {
     let command;
     if (client.commands.has(commandName)) {
       command = client.commands.get(commandName);
+    } else if (client.aliases.has(commandName)) {
+      command = client.commands.get(client.aliases.get(commandName));
     } else {
       return msg.channel.send({ content: "That Command doesn't exist" });
     }
@@ -49,3 +56,7 @@ client.on("messageCreate", async (msg) => {
 });
 
 client.login(process.env.DISCORD_TOKEN);
+
+exports.module = {
+  prefix: prefix,
+};
