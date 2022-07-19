@@ -53,7 +53,7 @@ A **bot** is an automated Discord account. It utilises the [Discord API](https:/
 * **chests** - Returns the future chests the user is about to recieve and the special chests + their location in queue. (can ask for user's chests or command sender chests if no one is tagged).
   `!!chests @user`
   
-* **info** - A dynamic-designed command featuring all of the commands available by the bot with a description, devided to basic command and mod commands.
+* **info** - A dynamic-designed command featuring all of the commands available by the bot with a description,devided to basic command and mod commands.
   ![info command](https://github.com/avivmoshe11/FullStackIL-Bot/blob/master/src/images/info.png?raw=true)
   
 * **help** - A dynamic-designed command featuring a request for help by user, can add reason and will state voice channel if in one for efficiency bonus.
