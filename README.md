@@ -47,7 +47,7 @@ A **bot** is an automated Discord account. It utilises the [Discord API](https:/
   
   ![adminpanel command](https://github.com/avivmoshe11/FullStackIL-Bot/blob/master/src/images/adminpanel.png?raw=true)
 
-* **profile* - Return a player card (same as in getplayer) from the user linked to the discord account. (tag already saved). (can ask for user's profile or command sender profile if no one is tagged).
+* **profile** - Return a player card (same as in getplayer) from the user linked to the discord account. (tag already saved). (can ask for user's profile or command sender profile if no one is tagged).
   `!!profile @user`
   
 * **chests** - Returns the future chests the user is about to recieve and the special chests + their location in queue. (can ask for user's chests or command sender chests if no one is tagged).
