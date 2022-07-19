@@ -34,29 +34,40 @@ A **bot** is an automated Discord account. It utilises the [Discord API](https:/
 * **getplayer** - Returns a player card from the official Clash Royale API and designed to feature the information nicely. 
   `!!getplayer #playertag`
   
+  ![getplayer command with attributes](https://github.com/avivmoshe11/ClashRoyaleAPIbot/blob/master/src/images/getplayer.png?raw=true)
+  
 * **save** - Saves a valid tag to the user's discord user.
   `!!save #playertag`
   
-  ![help command with attributes](https://github.com/avivmoshe11/FullStackIL-Bot/blob/master/src/images/help.png?raw=true)
+  ![save command with attributes](https://github.com/avivmoshe11/ClashRoyaleAPIbot/blob/master/src/images/save.png?raw=true)
 
 * **verify** - Addes a quest to your account to open a clan with the given name. Re-run the command once you finished. Once you're verified you will get a rank role based on your account's highest trophies.
   `!!verify`
 
+  ![verify command](https://github.com/avivmoshe11/ClashRoyaleAPIbot/blob/master/src/images/verify.png?raw=true)
+
 * **verifyuser** - Moderator restricted function, verifies a user (target user if tagged else the command sender) without need of quest. Once the user is verified he will recieve a rank role based on the account's highest trohpies.
   `!!verifyuser @user`
-  
-  ![adminpanel command](https://github.com/avivmoshe11/FullStackIL-Bot/blob/master/src/images/adminpanel.png?raw=true)
 
 * **profile** - Return a player card (same as in getplayer) from the user linked to the discord account. (tag already saved). (can ask for user's profile or command sender profile if no one is tagged).
   `!!profile @user`
   
+  ![profile command](https://github.com/avivmoshe11/ClashRoyaleAPIbot/blob/master/src/images/profile.png?raw=true)
+  
 * **chests** - Returns the future chests the user is about to recieve and the special chests + their location in queue. (can ask for user's chests or command sender chests if no one is tagged).
   `!!chests @user`
   
+  ![chests command](https://github.com/avivmoshe11/ClashRoyaleAPIbot/blob/master/src/images/chests.png?raw=true)
+  
 * **info** - A dynamic-designed command featuring all of the commands available by the bot with a description, devided to basic command and mod commands.
-  ![info command](https://github.com/avivmoshe11/FullStackIL-Bot/blob/master/src/images/info.png?raw=true)
+``!!info``
+
+  ![chests command](https://github.com/avivmoshe11/ClashRoyaleAPIbot/blob/master/src/images/info.png?raw=true)
   
 * **help** - A dynamic-designed command featuring a request for help by user, can add reason and will state voice channel if in one for efficiency bonus.
+``!!help <reason>``
+
+  ![help command with attributes](https://github.com/avivmoshe11/ClashRoyaleAPIbot/blob/master/src/images/help.png?raw=true)
 
 
 Additionally, added a full aliases system by the discord users community conventions.
