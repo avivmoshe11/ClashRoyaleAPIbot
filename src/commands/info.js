@@ -4,7 +4,7 @@ module.exports = {
   name: "info",
   description: "This method returns the bot's full command list that's available for members",
   group: "none",
-  aliases: [],
+  aliases: ["cmds", "cmd"],
   run: async (client, msg, args) => {
     const spaces = "ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ";
     let name = await botname(client, msg);
@@ -12,7 +12,7 @@ module.exports = {
     const exampleEmbed = new MessageEmbed()
       .setColor("#04a2d5")
       .setThumbnail("https://yt3.ggpht.com/ytc/AKedOLSCwTWVJEsVlAvynsu6RQk8iW-LyDt2x9bssakV3Q=s900-c-k-c0x00ffffff-no-rj")
-      .setTitle(`${name}'s Commands :squid:`)
+      .setTitle(`${name}'s Commands `)
       .setDescription(`**Basic command list:** ${spaces}  `)
       .addFields(commandlist(client, main.module.prefix, "all"))
       .addField("\u200B", " \u200B")

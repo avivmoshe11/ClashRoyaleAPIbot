@@ -18,7 +18,7 @@ module.exports = {
     try {
       const embeddedMessage = new MessageEmbed()
         .setColor("#04a2d5")
-        .setTitle(`${isVerified(userFromDb)}  **${data.response.name}  |  ${data.response.tag}** :squid:`)
+        .setTitle(`${isVerified(userFromDb)}  **${data.response.name}  |  ${data.response.tag}**`)
         .setURL(`https://royaleapi.com/player/${data.response.tag.slice(1)}`)
         .setFields([
           { name: `Season Highestㅤㅤㅤ`, value: `${arenaEmoji(seasonHighest(data))} ${seasonHighest(data)}`, inline: true },
@@ -52,6 +52,7 @@ module.exports = {
           { name: `Cards Won`, value: `<:cardscollected:997495145207447562> ${data.response.challengeCardsWon}`, inline: true },
           { name: `Total Donations`, value: `<:cardstack:997495143835906088> ${data.response.totalDonations}`, inline: true },
         ])
+        .setTimestamp()
         .setFooter({
           text: "made by Aviv#1234",
           iconURL: "https://static.euronews.com/articles/stories/05/79/99/44/2000x1333_cmsv2_292bef7f-8fab-5f0d-bed5-63856832498b-5799944.jpg",

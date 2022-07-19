@@ -20,7 +20,6 @@ module.exports = {
     const data = await fetch.run("players", playerTag.replace("#", "%23"));
     const chestData = await fetch.run("players", playerTag.replace("#", "%23"), "upcomingchests");
     if (data.err || data.response.reason == "notFound") return msg.channel.send("invalid tag");
-    console.log(data.response.name);
 
     try {
       const embeddedMessage = new MessageEmbed()
@@ -31,6 +30,7 @@ module.exports = {
           { name: `Upcoming Chests`, value: `${upcomingChests(chestData)}` },
           { name: `Far Juicy Chests`, value: `${farJuicyChests(chestData)}` },
         ])
+        .setTimestamp()
         .setFooter({
           text: "made by Aviv#1234",
           iconURL: "https://static.euronews.com/articles/stories/05/79/99/44/2000x1333_cmsv2_292bef7f-8fab-5f0d-bed5-63856832498b-5799944.jpg",
@@ -57,7 +57,6 @@ function upcomingChests(chestData) {
 
 function farJuicyChests(chestData) {
   const chests = chestData.response.items.filter((index) => index.index > 8);
-  console.log(chests);
   let chestEmojis = "";
   for (let chest of chests) {
     chestEmojis += chestToEmoji(chest.name) + chest.index + " ";
