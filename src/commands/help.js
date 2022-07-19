@@ -7,13 +7,13 @@ module.exports = {
   aliases: ["h", "helpme"],
   run: async (client, msg, args) => {
     const memberChannel = await msg.member.voice.channel;
-    const presentedChannel = memberChannel ? `<#${memberChannel.id}>` : `not in voice channel`;
-    reason = args.join(", ") ? `${args.join(" ")}` : `not stated`;
+    const presentedChannel = memberChannel ? `<#${memberChannel.id}>` : `Not in voice channel`;
+    reason = args.join(", ") ? `${args.join(" ")}` : `Not stated`;
     const exampleEmbed = new MessageEmbed()
       .setColor("#04a2d5")
       .setTitle(`${msg.author.tag} needs your help!`)
-      .addField(`reason:`, reason, true)
-      .addField(`user in voice:`, presentedChannel, true)
+      .addField(`Reason:`, reason, true)
+      .addField(`User in voice:`, presentedChannel, true)
       .setTimestamp()
       .setFooter({
         text: "made by Aviv#1234",
