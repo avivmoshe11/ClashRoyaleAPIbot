@@ -14,10 +14,10 @@ module.exports = {
       .setThumbnail("https://yt3.ggpht.com/ytc/AKedOLSCwTWVJEsVlAvynsu6RQk8iW-LyDt2x9bssakV3Q=s900-c-k-c0x00ffffff-no-rj")
       .setTitle(`${name}'s Commands `)
       .setDescription(`**Basic command list:** ${spaces}  `)
-      .addFields(commandlist(client, main.module.prefix, "all"))
+      .addFields(commandlist(client, main.vars.prefix, "all"))
       .addField("\u200B", " \u200B")
       .addField(`Moderator command list:`, `${spaces}`)
-      .addFields(commandlist(client, main.module.prefix, "mod"))
+      .addFields(commandlist(client, main.vars.prefix, "mod"))
       .setImage("https://clashroyale.com/uploaded-images/2ndanniversary_hero.jpg?mtime=20180301060016")
       .setTimestamp()
       .setFooter({

@@ -7,7 +7,7 @@ const client = new Client({ intents: new Intents(32767) });
 const fs = require("fs");
 
 mongoose
-  .connect(process.env.LOGIN)
+  .connect(process.env.ATLAS_LOGIN)
   .then(() => {
     console.log("connected to mongodb");
   })
@@ -57,6 +57,6 @@ client.on("messageCreate", async (msg) => {
 
 client.login(process.env.DISCORD_TOKEN);
 
-exports.module = {
+exports.vars = {
   prefix: prefix,
 };
