@@ -11,7 +11,6 @@ module.exports = {
     const userId = msg.author.id;
     const profileFromDb = await Profile.findOne({ discordId: userId });
     if (!profileFromDb) return msg.channel.send("There is no player profile saved under that user");
-    console.log(profileFromDb);
     if (profileFromDb.verified) return msg.channel.send("User already verified");
 
     if (!profileFromDb.verifyQuest) {

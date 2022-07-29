@@ -31,7 +31,7 @@ for (file of commands) {
   console.log(`${file} has been loaded`);
 }
 
-const prefix = "!!";
+const prefix = "!";
 
 client.on("ready", async () => {
   console.log("ready!");
