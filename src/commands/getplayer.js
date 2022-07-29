@@ -15,7 +15,6 @@ module.exports = {
     const data = await fetch.run("players", playerTag.replace("#", "%23"));
     if (data.err || data.response.reason == "notFound") return msg.channel.send("invalid tag");
     const userFromDb = await Profile.findOne({ playerTag: playerTag });
-    console.log(data.err, data.response, userFromDb);
     try {
       const embeddedMessage = new MessageEmbed()
         .setColor("#04a2d5")
